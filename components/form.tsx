@@ -1,29 +1,47 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import Modal from "./modal";
 
 export default function Form() {
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
-  });
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [subject, setSubject] = useState("");
+  const [open, setOpen] = useState(false);
 
-  const submitForm = (e: any) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(form);
-  };
 
-  const handleChange = (e: any) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
+    let form = {
+      firstName,
+      lastName,
+      email,
+      phone,
+      subject,
+    };
+
+    const rawResponse = await fetch("/api/submit", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
     });
+    const content = await rawResponse.json();
+
+    setOpen(content.status === 200);
+
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPhone("");
+    setSubject("");
   };
 
   return (
     <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12 shadow-lg">
+      {open ? <Modal /> : ""}
       <h3 className="text-lg font-medium text-warm-gray-900">
         Send us a message
       </h3>
@@ -31,7 +49,7 @@ export default function Form() {
         action="#"
         method="POST"
         className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
-        onSubmit={submitForm}
+        onSubmit={handleSubmit}
       >
         <div>
           <label
@@ -47,7 +65,8 @@ export default function Form() {
               id="first-name"
               autoComplete="given-name"
               className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-teal-500 focus:ring-teal-500"
-              onChange={handleChange}
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
               minLength={2}
             />
           </div>
@@ -66,7 +85,8 @@ export default function Form() {
               id="last-name"
               autoComplete="family-name"
               className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-teal-500 focus:ring-teal-500"
-              onChange={handleChange}
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
               minLength={2}
             />
           </div>
@@ -85,7 +105,8 @@ export default function Form() {
               type="email"
               autoComplete="email"
               className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-teal-500 focus:ring-teal-500"
-              onChange={handleChange}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               minLength={5}
               required
             />
@@ -107,8 +128,8 @@ export default function Form() {
               id="phone"
               autoComplete="tel"
               className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-teal-500 focus:ring-teal-500"
-              aria-describedby="phone-optional"
-              onChange={handleChange}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               required
             />
           </div>
@@ -126,12 +147,13 @@ export default function Form() {
               name="subject"
               id="subject"
               className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-teal-500 focus:ring-teal-500"
-              onChange={handleChange}
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
               required
             />
           </div>
         </div>
-        <div className="sm:col-span-2">
+        {/* <div className="sm:col-span-2">
           <div className="flex justify-between">
             <label
               htmlFor="message"
@@ -154,7 +176,7 @@ export default function Form() {
               onChange={handleChange}
             />
           </div>
-        </div>
+        </div> */}
         <div className="sm:col-span-2 sm:flex sm:justify-end">
           <button
             type="submit"

@@ -2,6 +2,8 @@ import Head from "next/head";
 import Form from "../components/form";
 import Footer from "../components/footer";
 
+//TODO: al tener éxito, generación de QR
+
 export default function Home() {
   return (
     <>
