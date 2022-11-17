@@ -20,7 +20,7 @@ export default function Form() {
       subject,
     };
 
-    const rawResponse = await fetch("/api/submit", {
+    const prismaResponse = await fetch("/api/prisma", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -28,9 +28,21 @@ export default function Form() {
       },
       body: JSON.stringify(form),
     });
-    const content = await rawResponse.json();
+    const prismaContent = await prismaResponse.json();
+    //TODO: obtener ID y enviarlo al body del sheets
+    console.log(prismaContent.id);
 
-    setOpen(content.status === 200);
+    const sheetsResponse = await fetch("/api/submit", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...form, id: prismaContent.id }),
+    });
+    const sheetsContent = await sheetsResponse.json();
+
+    setOpen(sheetsContent.status === 200);
 
     setFirstName("");
     setLastName("");

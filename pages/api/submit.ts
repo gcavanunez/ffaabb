@@ -7,6 +7,7 @@ type SheetForm = {
   email: string;
   phone: string;
   subject: string;
+  id: string;
 };
 
 export default async function handler(
@@ -53,6 +54,7 @@ export default async function handler(
             body.phone,
             body.subject,
             new Date(),
+            body.id,
           ],
         ],
       },
@@ -63,8 +65,6 @@ export default async function handler(
       status: response.status,
     });
   } catch (e: any) {
-    console.log(e);
-
     return res.status(e.code).send({ message: e.message });
   }
 }
