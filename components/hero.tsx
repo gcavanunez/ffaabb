@@ -1,5 +1,5 @@
 import Image from "next/image";
-import cvt from "../public/images/cvt-abb.png";
+import cvt from "../public/images/cvt.png";
 
 export default function Hero() {
   return (
@@ -17,7 +17,7 @@ export default function Hero() {
       <div className="pt-4">
         <p className="text-white text-xl">Es hora de crear nuevos recuerdos</p>
       </div>
-      <div className="mx-auto max-w-md">
+      <div className="flex justify-center">
         <Image src={cvt} alt="Como los viejos tiempos" placeholder="blur" />
       </div>
     </div>

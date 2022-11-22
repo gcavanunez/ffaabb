@@ -23,11 +23,12 @@ export default async function handler(
   try {
     const auth = new google.auth.GoogleAuth({
       credentials: {
-        client_email: process.env.GOOGLE_CLIENT_EMAIL,
-        private_key: process.env.GOOGLE_SERVICE_PRIVATE_KEY?.replace(
-          /\\n/g,
-          "\n"
-        ),
+        client_email: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_EMAIL,
+        private_key:
+          process.env.NEXT_PUBLIC_GOOGLE_SERVICE_PRIVATE_KEY?.replace(
+            /\\n/g,
+            "\n"
+          ),
       },
       scopes: [
         "https://www.googleapis.com/auth/drive",
@@ -42,7 +43,7 @@ export default async function handler(
     });
 
     const response = await sheets.spreadsheets.values.append({
-      spreadsheetId: process.env.SPREADSHEET_ID,
+      spreadsheetId: process.env.NEXT_PUBLIC_SPREADSHEET_ID,
       range: "A1:G1",
       valueInputOption: "USER_ENTERED",
       requestBody: {

@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        "abb-red": "#FF000F",
+      },
       // fontFamily: {
       //   abb: ["Abb"],
       //   sans: ["Abb", "sans-serif"],

@@ -1,8 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
-import Hero from "../components/hero";
-import Form from "../components/form";
 import Footer from "../components/footer";
+import Form from "../components/form";
+import Hero from "../components/hero";
+import Photos from "../components/photos";
 import background from "../public/images/background.jpg";
 
 //TODO: al tener éxito, generación de QR
@@ -28,14 +29,12 @@ export default function Home() {
           />
         </div>
 
-        {/* <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"> */}
-        {/* <div className="flex flex-row justify-between sm:px-6 lg:px-8"> */}
-        <div className="lg:grid lg:grid-cols-3 px-6 lg:px-0">
+        <div className="lg:grid lg:grid-cols-3 px-6 pt-24 pb-6 lg:px-0 lg:pb-0 lg:pt-0">
           <div className="lg:hidden">
             <Hero />
           </div>
           <div className="hidden h-screen lg:grid grid-cols-1 content-center">
-            fotos desktop
+            <Photos />
           </div>
           <div className="h-screen grid grid-cols-1 content-center">
             <Form />
@@ -43,7 +42,9 @@ export default function Home() {
           <div className="hidden h-screen lg:grid grid-cols-1 content-center">
             <Hero />
           </div>
-          <div className="lg:hidden text-center">fotos móvil</div>
+          <div className="lg:hidden text-center">
+            <Photos />
+          </div>
         </div>
       </main>
 

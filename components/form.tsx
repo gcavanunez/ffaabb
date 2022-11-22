@@ -50,21 +50,21 @@ export default function Form() {
   };
 
   return (
-    <div className="bg-red-800 text-white py-10 px-6 lg:col-span-2 xl:p-12 shadow-lg">
+    <div className="bg-abb-red py-10 px-6 lg:col-span-2 xl:p-12 shadow-lg">
       {open ? <Modal /> : ""}
-      <h3 className="text-lg font-medium text-warm-gray-900 text-center">
+      <h3 className="text-lg text-white font-medium text-center">
         Formulario de Participación
       </h3>
       <form
         action="#"
         method="POST"
-        className="mt-6 space-y-8"
+        className="mt-6 space-y-6"
         onSubmit={handleSubmit}
       >
         <div>
           <label
             htmlFor="name"
-            className="block text-sm font-medium text-warm-gray-900"
+            className="text-white block text-sm font-medium text-warm-gray-900"
           >
             Nombre y apellido
           </label>
@@ -74,7 +74,7 @@ export default function Form() {
               name="name"
               id="name"
               autoComplete="name"
-              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-teal-500 focus:ring-teal-500"
+              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-abb-red focus:ring-abb-red"
               value={name}
               onChange={(e) => setName(e.target.value)}
               minLength={2}
@@ -84,7 +84,7 @@ export default function Form() {
         <div>
           <label
             htmlFor="company"
-            className="block text-sm font-medium text-warm-gray-900"
+            className="text-white block text-sm font-medium text-warm-gray-900"
           >
             Empresa
           </label>
@@ -94,7 +94,7 @@ export default function Form() {
               id="company"
               name="company"
               autoComplete="company"
-              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-teal-500 focus:ring-teal-500"
+              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-abb-red focus:ring-abb-red"
               value={company}
               onChange={(e) => setCompany(e.target.value)}
               required
@@ -104,7 +104,7 @@ export default function Form() {
         <div>
           <label
             htmlFor="phone"
-            className="block text-sm font-medium text-warm-gray-900"
+            className="text-white block text-sm font-medium text-warm-gray-900"
           >
             Teléfono
           </label>
@@ -115,7 +115,7 @@ export default function Form() {
               name="phone"
               id="phone"
               autoComplete="tel"
-              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-teal-500 focus:ring-teal-500"
+              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-abb-red focus:ring-abb-red"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               required
@@ -125,7 +125,7 @@ export default function Form() {
         <div>
           <label
             htmlFor="document"
-            className="block text-sm font-medium text-warm-gray-900"
+            className="text-white block text-sm font-medium text-warm-gray-900"
           >
             DNI / CE
           </label>
@@ -135,7 +135,7 @@ export default function Form() {
               name="document"
               type="number"
               autoComplete="document"
-              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-teal-500 focus:ring-teal-500"
+              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-abb-red focus:ring-abb-red"
               value={document}
               onChange={(e) => setDocument(e.target.value)}
               minLength={5}
@@ -146,7 +146,7 @@ export default function Form() {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-warm-gray-900"
+            className="text-white block text-sm font-medium text-warm-gray-900"
           >
             Email
           </label>
@@ -156,7 +156,7 @@ export default function Form() {
               name="email"
               type="email"
               autoComplete="email"
-              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-teal-500 focus:ring-teal-500"
+              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-abb-red focus:ring-abb-red"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               minLength={5}
@@ -167,7 +167,7 @@ export default function Form() {
         <div className="sm:flex">
           <button
             type="submit"
-            className="mx-auto mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-white px-6 py-3 text-base font-medium text-red-900 shadow-sm transition hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:w-3/5"
+            className="mx-auto mt-4 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-white px-6 py-3 text-base font-medium text-abb-red shadow-sm transition hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:w-3/5"
           >
             Registrar
           </button>
