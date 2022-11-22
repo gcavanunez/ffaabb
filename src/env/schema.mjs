@@ -8,6 +8,9 @@ import { z } from "zod";
 export const serverSchema = z.object({
   DATABASE_URL: z.string().url(),
   NODE_ENV: z.enum(["development", "test", "production"]),
+  SPREADSHEET_ID: z.string(),
+  GOOGLE_CLIENT_EMAIL: z.string(),
+  GOOGLE_SERVICE_PRIVATE_KEY: z.string(),
 });
 
 /**
