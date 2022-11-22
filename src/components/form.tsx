@@ -1,5 +1,15 @@
-import { FormEvent, useState } from "react";
+// import { FormEvent, useState } from "react";
+import { useState } from "react";
+import type { SubmitHandler } from "react-hook-form";
 import Modal from "./modal";
+
+interface IFormInput {
+  name: string;
+  company: string;
+  phone: string;
+  document: string;
+  email: string;
+}
 
 export default function Form() {
   const [name, setName] = useState("");
@@ -9,16 +19,9 @@ export default function Form() {
   const [email, setEmail] = useState("");
   const [open, setOpen] = useState(false);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    let form = {
-      name,
-      company,
-      phone,
-      document,
-      email,
-    };
+  // const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit: SubmitHandler<IFormInput> = async (form) => {
+    // e.preventDefault();
 
     const prismaResponse = await fetch("/api/setUser", {
       method: "POST",
@@ -50,21 +53,21 @@ export default function Form() {
   };
 
   return (
-    <div className="bg-abb-red py-10 px-6 lg:col-span-2 xl:p-12 shadow-lg">
+    <div className="bg-abb-red py-10 px-6 shadow-lg lg:col-span-2 xl:p-12">
       {open ? <Modal /> : ""}
-      <h3 className="text-lg text-white font-medium text-center">
+      <h3 className="text-center text-lg font-medium text-white">
         Formulario de Participación
       </h3>
       <form
         action="#"
         method="POST"
         className="mt-6 space-y-6"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(handleSubmit)}
       >
         <div>
           <label
             htmlFor="name"
-            className="text-white block text-sm font-medium text-warm-gray-900"
+            className="text-warm-gray-900 block text-sm font-medium text-white"
           >
             Nombre y apellido
           </label>
@@ -74,7 +77,7 @@ export default function Form() {
               name="name"
               id="name"
               autoComplete="name"
-              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-abb-red focus:ring-abb-red"
+              className="border-warm-gray-300 text-warm-gray-900 block w-full rounded-md py-3 px-4 shadow-sm focus:border-abb-red focus:ring-abb-red"
               value={name}
               onChange={(e) => setName(e.target.value)}
               minLength={2}
@@ -84,7 +87,7 @@ export default function Form() {
         <div>
           <label
             htmlFor="company"
-            className="text-white block text-sm font-medium text-warm-gray-900"
+            className="text-warm-gray-900 block text-sm font-medium text-white"
           >
             Empresa
           </label>
@@ -94,7 +97,7 @@ export default function Form() {
               id="company"
               name="company"
               autoComplete="company"
-              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-abb-red focus:ring-abb-red"
+              className="border-warm-gray-300 text-warm-gray-900 block w-full rounded-md py-3 px-4 shadow-sm focus:border-abb-red focus:ring-abb-red"
               value={company}
               onChange={(e) => setCompany(e.target.value)}
               required
@@ -104,7 +107,7 @@ export default function Form() {
         <div>
           <label
             htmlFor="phone"
-            className="text-white block text-sm font-medium text-warm-gray-900"
+            className="text-warm-gray-900 block text-sm font-medium text-white"
           >
             Teléfono
           </label>
@@ -115,7 +118,7 @@ export default function Form() {
               name="phone"
               id="phone"
               autoComplete="tel"
-              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-abb-red focus:ring-abb-red"
+              className="border-warm-gray-300 text-warm-gray-900 block w-full rounded-md py-3 px-4 shadow-sm focus:border-abb-red focus:ring-abb-red"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               required
@@ -125,7 +128,7 @@ export default function Form() {
         <div>
           <label
             htmlFor="document"
-            className="text-white block text-sm font-medium text-warm-gray-900"
+            className="text-warm-gray-900 block text-sm font-medium text-white"
           >
             DNI / CE
           </label>
@@ -135,7 +138,7 @@ export default function Form() {
               name="document"
               type="number"
               autoComplete="document"
-              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-abb-red focus:ring-abb-red"
+              className="border-warm-gray-300 text-warm-gray-900 block w-full rounded-md py-3 px-4 shadow-sm focus:border-abb-red focus:ring-abb-red"
               value={document}
               onChange={(e) => setDocument(e.target.value)}
               minLength={5}
@@ -146,7 +149,7 @@ export default function Form() {
         <div>
           <label
             htmlFor="email"
-            className="text-white block text-sm font-medium text-warm-gray-900"
+            className="text-warm-gray-900 block text-sm font-medium text-white"
           >
             Email
           </label>
@@ -156,7 +159,7 @@ export default function Form() {
               name="email"
               type="email"
               autoComplete="email"
-              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-abb-red focus:ring-abb-red"
+              className="border-warm-gray-300 text-warm-gray-900 block w-full rounded-md py-3 px-4 shadow-sm focus:border-abb-red focus:ring-abb-red"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               minLength={5}
