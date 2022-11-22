@@ -34,7 +34,7 @@ export default function User() {
 
       <main className="">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl h-screen grid grid-cols-1 content-center">
+          <div className="mx-auto grid h-screen max-w-3xl grid-cols-1 content-center">
             Info de user: nombre:
           </div>
         </div>

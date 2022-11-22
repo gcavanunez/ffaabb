@@ -1,5 +1,5 @@
 import Image from "next/image";
-import people from "../public/images/people.png";
+import people from "../../public/images/people.png";
 
 export default function Photos() {
   return (

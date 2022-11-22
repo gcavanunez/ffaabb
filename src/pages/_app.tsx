@@ -1,5 +1,6 @@
 import "../styles/globals.css";
-import type { AppProps } from "next/app";
+import { type AppType } from "next/app";
+import { trpc } from "../utils/trpc";
 // import localFont from "@next/font/local";
 
 // const abb = localFont({
@@ -28,6 +29,12 @@ import type { AppProps } from "next/app";
 //   variable: "--font-abb",
 // });
 
-export default function App({ Component, pageProps }: AppProps) {
+// export default function App({ Component, pageProps }: AppProps) {
+//   return <Component {...pageProps} />;
+// }
+
+const MyApp: AppType = ({ Component, pageProps }) => {
   return <Component {...pageProps} />;
-}
+};
+
+export default trpc.withTRPC(MyApp);

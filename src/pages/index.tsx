@@ -4,7 +4,8 @@ import Footer from "../components/footer";
 import Form from "../components/form";
 import Hero from "../components/hero";
 import Photos from "../components/photos";
-import background from "../public/images/background.jpg";
+
+import background from "../../public/images/background.jpg";
 
 //TODO: al tener éxito, generación de QR
 
@@ -29,20 +30,20 @@ export default function Home() {
           />
         </div>
 
-        <div className="lg:grid lg:grid-cols-3 px-6 pt-24 pb-6 lg:px-0 lg:pb-0 lg:pt-0">
+        <div className="px-6 pt-24 pb-6 lg:grid lg:grid-cols-3 lg:px-0 lg:pb-0 lg:pt-0">
           <div className="lg:hidden">
             <Hero />
           </div>
-          <div className="hidden h-screen lg:grid grid-cols-1 content-center">
+          <div className="hidden h-screen grid-cols-1 content-center lg:grid">
             <Photos />
           </div>
-          <div className="h-screen grid grid-cols-1 content-center">
+          <div className="grid h-screen grid-cols-1 content-center">
             <Form />
           </div>
-          <div className="hidden h-screen lg:grid grid-cols-1 content-center">
+          <div className="hidden h-screen grid-cols-1 content-center lg:grid">
             <Hero />
           </div>
-          <div className="lg:hidden text-center">
+          <div className="text-center lg:hidden">
             <Photos />
           </div>
         </div>
