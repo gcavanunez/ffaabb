@@ -1,6 +1,7 @@
 // import { FormEvent, useState } from "react";
 import { useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Modal from "./modal";
 
 interface IFormInput {
@@ -12,15 +13,15 @@ interface IFormInput {
 }
 
 export default function Form() {
-  const [name, setName] = useState("");
-  const [company, setCompany] = useState("");
-  const [phone, setPhone] = useState("");
-  const [document, setDocument] = useState("");
-  const [email, setEmail] = useState("");
+  // const [name, setName] = useState("");
+  // const [company, setCompany] = useState("");
+  // const [phone, setPhone] = useState("");
+  // const [document, setDocument] = useState("");
+  // const [email, setEmail] = useState("");
   const [open, setOpen] = useState(false);
-
+  const { register, handleSubmit } = useForm<IFormInput>();
   // const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  const handleSubmit: SubmitHandler<IFormInput> = async (form) => {
+  const onSubmit: SubmitHandler<IFormInput> = async (form) => {
     // e.preventDefault();
 
     const prismaResponse = await fetch("/api/setUser", {
@@ -62,7 +63,7 @@ export default function Form() {
         action="#"
         method="POST"
         className="mt-6 space-y-6"
-        onSubmit={handleSubmit(handleSubmit)}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div>
           <label
@@ -74,12 +75,10 @@ export default function Form() {
           <div className="mt-1">
             <input
               type="text"
-              name="name"
               id="name"
               autoComplete="name"
               className="border-warm-gray-300 text-warm-gray-900 block w-full rounded-md py-3 px-4 shadow-sm focus:border-abb-red focus:ring-abb-red"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              {...register("name")}
               minLength={2}
             />
           </div>
@@ -95,11 +94,9 @@ export default function Form() {
             <input
               type="text"
               id="company"
-              name="company"
               autoComplete="company"
               className="border-warm-gray-300 text-warm-gray-900 block w-full rounded-md py-3 px-4 shadow-sm focus:border-abb-red focus:ring-abb-red"
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
+              {...register("company")}
               required
             />
           </div>
@@ -115,12 +112,10 @@ export default function Form() {
           <div className="mt-1">
             <input
               type="number"
-              name="phone"
               id="phone"
               autoComplete="tel"
               className="border-warm-gray-300 text-warm-gray-900 block w-full rounded-md py-3 px-4 shadow-sm focus:border-abb-red focus:ring-abb-red"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              {...register("phone")}
               required
             />
           </div>
@@ -135,12 +130,10 @@ export default function Form() {
           <div className="mt-1">
             <input
               id="document"
-              name="document"
               type="number"
               autoComplete="document"
               className="border-warm-gray-300 text-warm-gray-900 block w-full rounded-md py-3 px-4 shadow-sm focus:border-abb-red focus:ring-abb-red"
-              value={document}
-              onChange={(e) => setDocument(e.target.value)}
+              {...register("document")}
               minLength={5}
               required
             />
@@ -156,12 +149,10 @@ export default function Form() {
           <div className="mt-1">
             <input
               id="email"
-              name="email"
               type="email"
               autoComplete="email"
               className="border-warm-gray-300 text-warm-gray-900 block w-full rounded-md py-3 px-4 shadow-sm focus:border-abb-red focus:ring-abb-red"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              {...register("email")}
               minLength={5}
               required
             />
