@@ -50,7 +50,7 @@ export default function Form() {
   };
 
   return (
-    <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12 shadow-lg">
+    <div className="bg-red-800 text-white py-10 px-6 lg:col-span-2 xl:p-12 shadow-lg">
       {open ? <Modal /> : ""}
       <h3 className="text-lg font-medium text-warm-gray-900 text-center">
         Formulario de Participación
@@ -164,10 +164,10 @@ export default function Form() {
             />
           </div>
         </div>
-        <div className="sm:col-span-2 sm:flex sm:justify-end">
+        <div className="sm:flex">
           <button
             type="submit"
-            className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-teal-500 px-6 py-3 text-base font-medium text-white shadow-sm transition hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 sm:w-auto"
+            className="mx-auto mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-white px-6 py-3 text-base font-medium text-red-900 shadow-sm transition hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:w-3/5"
           >
             Registrar
           </button>
