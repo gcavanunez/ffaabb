@@ -2,13 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @layer base {
+@layer base {
   @font-face {
     font-family: "Abb";
     font-style: normal;
     font-weight: 400;
-    src: local(""), url("/fonts/ABBRg.woff") format("woff"),
-      url("/fonts/ABBRg.woff2") format("woff2");
+    src: local(""), url("/fonts/abbrg.woff") format("woff"),
+      url("/fonts/abbrg.woff2") format("woff2");
     font-display: swap;
   }
   @font-face {
@@ -19,10 +19,10 @@
       url("/fonts/ABBMd.woff2") format("woff2");
     font-display: swap;
   }
-} */
-/* 
+}
+
 @layer base {
   html {
     @apply font-abb;
   }
-} */
+}
