@@ -7,8 +7,8 @@
     font-family: "Abb";
     font-style: normal;
     font-weight: 400;
-    src: local(""), url("/fonts/abbrg.woff") format("woff"),
-      url("/fonts/abbrg.woff2") format("woff2");
+    src: local(""), url("/fonts/face-abbrg.woff") format("woff"),
+      url("/fonts/face-abbrg.woff2") format("woff2");
     font-display: swap;
   }
   @font-face {

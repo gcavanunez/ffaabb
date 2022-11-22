@@ -9,16 +9,14 @@ type IInput = {
   document: string;
   email: string;
 };
+import { env } from "../../../env/server.mjs";
+
 const createInSheets = async (body: IInput) => {
   try {
     const auth = new google.auth.GoogleAuth({
       credentials: {
-        client_email: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_EMAIL,
-        private_key:
-          process.env.NEXT_PUBLIC_GOOGLE_SERVICE_PRIVATE_KEY?.replace(
-            /\\n/g,
-            "\n"
-          ),
+        client_email: env.GOOGLE_CLIENT_EMAIL,
+        private_key: env.GOOGLE_SERVICE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
       },
       scopes: [
         "https://www.googleapis.com/auth/drive",
@@ -33,7 +31,7 @@ const createInSheets = async (body: IInput) => {
     });
 
     await sheets.spreadsheets.values.append({
-      spreadsheetId: process.env.NEXT_PUBLIC_SPREADSHEET_ID,
+      spreadsheetId: env.SPREADSHEET_ID,
       range: "A1:G1",
       valueInputOption: "USER_ENTERED",
       requestBody: {
@@ -53,6 +51,7 @@ const createInSheets = async (body: IInput) => {
 
     return true;
   } catch (e: any) {
+    console.log(e);
     return false;
   }
 };

@@ -21,7 +21,7 @@ export default function Form() {
   // const [email, setEmail] = useState("");
   const [open, setOpen] = useState(false);
   const { mutateAsync } = trpc.contacts.saveContact.useMutation();
-  const { register, handleSubmit } = useForm<IFormInput>();
+  const { register, handleSubmit, reset } = useForm<IFormInput>();
   // const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
   const onSubmit: SubmitHandler<IFormInput> = async (form) => {
     // e.preventDefault();
@@ -30,6 +30,7 @@ export default function Form() {
 
     if (res.success) {
       setOpen(true);
+      reset();
     }
     // const prismaResponse = await fetch("/api/setUser", {
     //   method: "POST",
