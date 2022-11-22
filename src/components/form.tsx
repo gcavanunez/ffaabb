@@ -3,6 +3,7 @@ import { useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import Modal from "./modal";
+import { trpc } from "../utils/trpc";
 
 interface IFormInput {
   name: string;
@@ -19,38 +20,36 @@ export default function Form() {
   // const [document, setDocument] = useState("");
   // const [email, setEmail] = useState("");
   const [open, setOpen] = useState(false);
+  const { mutateAsync } = trpc.contacts.saveContact.useMutation();
   const { register, handleSubmit } = useForm<IFormInput>();
   // const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
   const onSubmit: SubmitHandler<IFormInput> = async (form) => {
     // e.preventDefault();
 
-    const prismaResponse = await fetch("/api/setUser", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
-    const prismaContent = await prismaResponse.json();
+    const res = await mutateAsync({ ...form });
 
-    const sheetsResponse = await fetch("/api/submit", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...form, id: prismaContent.id }),
-    });
-    const sheetsContent = await sheetsResponse.json();
+    if (res.success) {
+      setOpen(true);
+    }
+    // const prismaResponse = await fetch("/api/setUser", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(form),
+    // });
+    // const prismaContent = await prismaResponse.json();
 
-    setOpen(sheetsContent.status === 200);
-
-    setName("");
-    setCompany("");
-    setPhone("");
-    setDocument("");
-    setEmail("");
+    // const sheetsResponse = await fetch("/api/submit", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ ...form, id: prismaContent.id }),
+    // });
+    // const sheetsContent = await sheetsResponse.json();
   };
 
   return (
