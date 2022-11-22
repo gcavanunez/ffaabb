@@ -7,7 +7,7 @@ export default function User() {
   const router = useRouter();
 
   const getUser = async (id: number) => {
-    const response = await fetch("../api/prisma", {
+    const response = await fetch("../api/getUser", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -20,7 +20,7 @@ export default function User() {
   };
   let user = {};
   if (router.isReady) {
-    user = getUser(parseInt(router.query.id));
+    user = getUser(0);
   }
   console.log(user);
 
