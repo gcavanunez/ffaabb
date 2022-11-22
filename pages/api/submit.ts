@@ -2,11 +2,11 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { google } from "googleapis";
 
 type SheetForm = {
-  firstName: string;
-  lastName: string;
-  email: string;
+  name: string;
+  company: string;
   phone: string;
-  subject: string;
+  document: string;
+  email: string;
   id: string;
 };
 
@@ -43,16 +43,16 @@ export default async function handler(
 
     const response = await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.SPREADSHEET_ID,
-      range: "A1:F1",
+      range: "A1:G1",
       valueInputOption: "USER_ENTERED",
       requestBody: {
         values: [
           [
-            body.firstName,
-            body.lastName,
-            body.email,
+            body.name,
+            body.company,
             body.phone,
-            body.subject,
+            body.document,
+            body.email,
             new Date(),
             body.id,
           ],

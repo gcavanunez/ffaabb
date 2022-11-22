@@ -13,9 +13,9 @@ datasource db {
 model User {
   id          Int      @id @default(autoincrement())
   createdAt   DateTime @default(now())
-  firstName   String   @db.VarChar(255)
-  lastName    String   @db.VarChar(255)
-  email       String
+  name        String   @db.VarChar(255)
+  company     String   @db.VarChar(255)
   phone       String
-  subject     String
+  document    String
+  email       String
 }

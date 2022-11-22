@@ -2,25 +2,25 @@ import { FormEvent, useState } from "react";
 import Modal from "./modal";
 
 export default function Form() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [company, setCompany] = useState("");
   const [phone, setPhone] = useState("");
-  const [subject, setSubject] = useState("");
+  const [document, setDocument] = useState("");
+  const [email, setEmail] = useState("");
   const [open, setOpen] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     let form = {
-      firstName,
-      lastName,
-      email,
+      name,
+      company,
       phone,
-      subject,
+      document,
+      email,
     };
 
-    const prismaResponse = await fetch("/api/prisma", {
+    const prismaResponse = await fetch("/api/setUser", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -29,8 +29,6 @@ export default function Form() {
       body: JSON.stringify(form),
     });
     const prismaContent = await prismaResponse.json();
-    //TODO: obtener ID y enviarlo al body del sheets
-    console.log(prismaContent.id);
 
     const sheetsResponse = await fetch("/api/submit", {
       method: "POST",
@@ -44,62 +42,104 @@ export default function Form() {
 
     setOpen(sheetsContent.status === 200);
 
-    setFirstName("");
-    setLastName("");
-    setEmail("");
+    setName("");
+    setCompany("");
     setPhone("");
-    setSubject("");
+    setDocument("");
+    setEmail("");
   };
 
   return (
     <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12 shadow-lg">
       {open ? <Modal /> : ""}
-      <h3 className="text-lg font-medium text-warm-gray-900">
-        Send us a message
+      <h3 className="text-lg font-medium text-warm-gray-900 text-center">
+        Formulario de Participación
       </h3>
       <form
         action="#"
         method="POST"
-        className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
+        className="mt-6 space-y-8"
         onSubmit={handleSubmit}
       >
         <div>
           <label
-            htmlFor="first-name"
+            htmlFor="name"
             className="block text-sm font-medium text-warm-gray-900"
           >
-            First name
+            Nombre y apellido
           </label>
           <div className="mt-1">
             <input
               type="text"
-              name="firstName"
-              id="first-name"
-              autoComplete="given-name"
+              name="name"
+              id="name"
+              autoComplete="name"
               className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-teal-500 focus:ring-teal-500"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               minLength={2}
             />
           </div>
         </div>
         <div>
           <label
-            htmlFor="last-name"
+            htmlFor="company"
             className="block text-sm font-medium text-warm-gray-900"
           >
-            Last name
+            Empresa
           </label>
           <div className="mt-1">
             <input
               type="text"
-              name="lastName"
-              id="last-name"
-              autoComplete="family-name"
+              id="company"
+              name="company"
+              autoComplete="company"
               className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-teal-500 focus:ring-teal-500"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              minLength={2}
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+        <div>
+          <label
+            htmlFor="phone"
+            className="block text-sm font-medium text-warm-gray-900"
+          >
+            Teléfono
+          </label>
+
+          <div className="mt-1">
+            <input
+              type="number"
+              name="phone"
+              id="phone"
+              autoComplete="tel"
+              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-teal-500 focus:ring-teal-500"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+        <div>
+          <label
+            htmlFor="document"
+            className="block text-sm font-medium text-warm-gray-900"
+          >
+            DNI / CE
+          </label>
+          <div className="mt-1">
+            <input
+              id="document"
+              name="document"
+              type="number"
+              autoComplete="document"
+              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-teal-500 focus:ring-teal-500"
+              value={document}
+              onChange={(e) => setDocument(e.target.value)}
+              minLength={5}
+              required
             />
           </div>
         </div>
@@ -124,77 +164,12 @@ export default function Form() {
             />
           </div>
         </div>
-        <div>
-          <div className="flex justify-between">
-            <label
-              htmlFor="phone"
-              className="block text-sm font-medium text-warm-gray-900"
-            >
-              Teléfono
-            </label>
-          </div>
-          <div className="mt-1">
-            <input
-              type="number"
-              name="phone"
-              id="phone"
-              autoComplete="tel"
-              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-teal-500 focus:ring-teal-500"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              required
-            />
-          </div>
-        </div>
-        <div className="sm:col-span-2">
-          <label
-            htmlFor="subject"
-            className="block text-sm font-medium text-warm-gray-900"
-          >
-            Subject
-          </label>
-          <div className="mt-1">
-            <input
-              type="text"
-              name="subject"
-              id="subject"
-              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-teal-500 focus:ring-teal-500"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-              required
-            />
-          </div>
-        </div>
-        {/* <div className="sm:col-span-2">
-          <div className="flex justify-between">
-            <label
-              htmlFor="message"
-              className="block text-sm font-medium text-warm-gray-900"
-            >
-              Message
-            </label>
-            <span id="message-max" className="text-sm text-warm-gray-500">
-              Max. 500 characters
-            </span>
-          </div>
-          <div className="mt-1">
-            <textarea
-              id="message"
-              name="message"
-              rows={4}
-              className="block w-full rounded-md border-warm-gray-300 py-3 px-4 text-warm-gray-900 shadow-sm focus:border-teal-500 focus:ring-teal-500"
-              aria-describedby="message-max"
-              defaultValue={""}
-              onChange={handleChange}
-            />
-          </div>
-        </div> */}
         <div className="sm:col-span-2 sm:flex sm:justify-end">
           <button
             type="submit"
             className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-teal-500 px-6 py-3 text-base font-medium text-white shadow-sm transition hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 sm:w-auto"
           >
-            Submit
+            Registrar
           </button>
         </div>
       </form>
