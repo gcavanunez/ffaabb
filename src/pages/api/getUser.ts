@@ -30,7 +30,6 @@ async function getUser(req: NextApiRequest, res: NextApiResponse) {
     const user = await prisma.user.findFirst({
       where: { id: req.body.id },
     });
-    console.log(user);
 
     return res.status(200).json(user);
   } catch (error) {

@@ -46,15 +46,16 @@ export default function Modal() {
                     >
                       ¡Gracias por registrarte!
                     </Dialog.Title>
-                    <div className="mt-2 text-sm text-gray-500">
+                    <div className="mt-2 space-y-3 text-sm text-gray-500">
                       <p>
-                        En algunos dias te enviaremos la confirmación de tu
-                        registro al correo que nos indicaste.
+                        En algunos dias te enviaremos la confirmación <br /> de
+                        tu registro al correo que nos indicaste.
                       </p>
                       <p>
                         Nota: solo las personas con el correo de confirmación
                         podrán ingresar al evento.
                       </p>
+                      <p>Atentamente, comité organizador ABB.</p>
                     </div>
                   </div>
                 </div>
