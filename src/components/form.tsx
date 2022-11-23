@@ -51,6 +51,7 @@ export default function Form() {
               className="border-warm-gray-300 text-warm-gray-900 block w-full rounded-md py-3 px-4 shadow-sm focus:border-abb-red focus:ring-abb-red"
               {...register("name")}
               minLength={2}
+              required
             />
           </div>
         </div>
