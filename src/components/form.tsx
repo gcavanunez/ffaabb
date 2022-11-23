@@ -1,4 +1,3 @@
-// import { FormEvent, useState } from "react";
 import { useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
@@ -14,43 +13,15 @@ interface IFormInput {
 }
 
 export default function Form() {
-  // const [name, setName] = useState("");
-  // const [company, setCompany] = useState("");
-  // const [phone, setPhone] = useState("");
-  // const [document, setDocument] = useState("");
-  // const [email, setEmail] = useState("");
   const [open, setOpen] = useState(false);
   const { mutateAsync } = trpc.contacts.saveContact.useMutation();
   const { register, handleSubmit, reset } = useForm<IFormInput>();
-  // const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
   const onSubmit: SubmitHandler<IFormInput> = async (form) => {
-    // e.preventDefault();
-
     const res = await mutateAsync({ ...form });
-
     if (res.success) {
       setOpen(true);
       reset();
     }
-    // const prismaResponse = await fetch("/api/setUser", {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(form),
-    // });
-    // const prismaContent = await prismaResponse.json();
-
-    // const sheetsResponse = await fetch("/api/submit", {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ ...form, id: prismaContent.id }),
-    // });
-    // const sheetsContent = await sheetsResponse.json();
   };
 
   return (

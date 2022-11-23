@@ -46,10 +46,14 @@ export default function Modal() {
                     >
                       ¡Gracias por registrarte!
                     </Dialog.Title>
-                    <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        En algunos dias te enviaremos la invitación al correo
-                        que nos indicaste.
+                    <div className="mt-2 text-sm text-gray-500">
+                      <p>
+                        En algunos dias te enviaremos la confirmación de tu
+                        registro al correo que nos indicaste.
+                      </p>
+                      <p>
+                        Nota: solo las personas con el correo de confirmación
+                        podrán ingresar al evento.
                       </p>
                     </div>
                   </div>
@@ -57,7 +61,7 @@ export default function Modal() {
                 <div className="mt-5 sm:mt-6">
                   <button
                     type="button"
-                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
+                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-abb-red px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-abb-red focus:ring-offset-2 sm:text-sm"
                     onClick={() => setOpen(false)}
                   >
                     Cerrar
