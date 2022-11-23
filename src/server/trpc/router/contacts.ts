@@ -98,7 +98,7 @@ export const contactsRouter = router({
             email: input.email,
           },
         });
-        createInSheets({ ...input, id: newEntry.id });
+        await createInSheets({ ...input, id: newEntry.id });
         // aqui puedes ahcer lo que haces tambien en api/submit
         return { res: newEntry, success: true };
       } catch (error) {
