@@ -10,6 +10,7 @@ type IInput = {
   email: string;
 };
 import { env } from "../../../env/server.mjs";
+import { TRPCError } from "@trpc/server";
 
 const createInSheets = async (body: IInput) => {
   try {
@@ -57,16 +58,20 @@ const createInSheets = async (body: IInput) => {
 };
 
 export const contactsRouter = router({
-  hello: publicProcedure
-    .input(z.object({ text: z.string().nullish() }).nullish())
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input?.text ?? "world"}`,
-      };
+  getContact: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input, ctx }) => {
+      const user = await ctx.prisma.user.findFirst({
+        where: { id: Number(input.id) },
+      });
+      if (!user) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: `No post with id '${input.id}'`,
+        });
+      }
+      return user;
     }),
-  // getAll: publicProcedure.query(({ ctx }) => {
-  //   return ctx.prisma.example.findMany();
-  // }),
   saveContact: publicProcedure
     .input(
       z
@@ -83,7 +88,6 @@ export const contactsRouter = router({
       if (!input) {
         return { res: "needs fields", success: false };
       }
-      // return ctx.prisma.example.findMany();
       try {
         const newEntry = await ctx.prisma.user.create({
           data: {

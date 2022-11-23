@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { trpc } from "../../utils/trpc";
 
 type User = {
   name: string;
@@ -11,33 +11,10 @@ type User = {
 };
 
 export default function User() {
-  const [user, setUser] = useState<User>({
-    name: "",
-    company: "",
-    phone: "",
-    document: "",
-    email: "",
+  const id = useRouter().query.id as string;
+  const { data: user } = trpc.contacts.getContact.useQuery({
+    id,
   });
-  const router = useRouter();
-  const { id } = router.query;
-
-  const getUser = (id: number) => {
-    return fetch("../api/getUser", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id }),
-    })
-      .then((response) => response.json())
-      .then((data) => setUser(data));
-  };
-
-  useEffect(() => {
-    id && getUser(parseInt(id as any));
-  }, [id]);
-
   return (
     <>
       <Head>
