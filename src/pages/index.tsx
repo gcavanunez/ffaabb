@@ -1,10 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
-import Footer from "../components/footer";
 import Form from "../components/form";
 import Hero from "../components/hero";
 import Photos from "../components/photos";
-
 import background from "../../public/images/background.jpg";
 
 //TODO: al tener éxito, generación de QR
@@ -34,10 +32,10 @@ export default function Home() {
           <div className="lg:hidden">
             <Hero />
           </div>
-          <div className="hidden h-screen grid-cols-1 content-center lg:grid">
+          <div className="hidden h-full grid-cols-1 content-center lg:grid">
             <Photos />
           </div>
-          <div className="grid h-screen grid-cols-1 content-center">
+          <div className="grid h-full grid-cols-1 content-center overflow-hidden lg:p-4">
             <Form />
           </div>
           <div className="hidden h-screen grid-cols-1 content-center lg:grid">
