@@ -4,6 +4,11 @@ import { useForm } from "react-hook-form";
 import Modal from "./modal";
 import { trpc } from "../utils/trpc";
 
+export type ClassValue = string | number | null | boolean | undefined;
+
+const classNames = (...classes: ClassValue[]) => {
+  return classes.filter(Boolean).join(" ");
+};
 interface IFormInput {
   name: string;
   company: string;
@@ -14,9 +19,10 @@ interface IFormInput {
 
 export default function Form() {
   const [open, setOpen] = useState(false);
-  const { mutateAsync } = trpc.contacts.saveContact.useMutation();
+  const { mutateAsync, isLoading } = trpc.contacts.saveContact.useMutation();
   const { register, handleSubmit, reset } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = async (form) => {
+    setOpen(false);
     const res = await mutateAsync({ ...form });
     if (res.success) {
       setOpen(true);
@@ -133,9 +139,13 @@ export default function Form() {
         <div className="sm:flex">
           <button
             type="submit"
-            className="mx-auto mt-4 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-white px-6 py-3 text-base font-medium text-abb-red shadow-sm transition hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:w-3/5"
+            disabled={isLoading}
+            className={classNames(
+              "mx-auto mt-4 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-white px-6 py-3 text-base font-medium text-abb-red shadow-sm transition  focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:w-3/5",
+              isLoading ? "opacity-70" : "hover:bg-red-200"
+            )}
           >
-            Registrar
+            {isLoading ? "Enviando..." : "Registrar"}
           </button>
         </div>
       </form>
