@@ -11,10 +11,20 @@ type User = {
 };
 
 export default function User() {
-  const id = useRouter().query.id as string;
-  const { data: user } = trpc.contacts.getContact.useQuery({
-    id,
-  });
+  const router = useRouter();
+  const id = router.query.id as string;
+  const { data: user } = trpc.contacts.getContact.useQuery(
+    {
+      id,
+    },
+    {
+      enabled: router.isReady,
+    }
+  );
+  // could also suspense
+  if (!user) {
+    return <>loading</>;
+  }
   return (
     <>
       <Head>
@@ -38,13 +48,13 @@ export default function User() {
                     Nombre y apellido
                   </dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    {user && user.name}
+                    {user.name}
                   </dd>
                 </div>
                 <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Empresa</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    {user && user.company}
+                    {user.company}
                   </dd>
                 </div>
                 <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
@@ -52,7 +62,7 @@ export default function User() {
                     Teléfono
                   </dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    {user && user.phone}
+                    {user.phone}
                   </dd>
                 </div>
                 <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
@@ -60,13 +70,13 @@ export default function User() {
                     DNI / CE
                   </dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    {user && user.document}
+                    {user.document}
                   </dd>
                 </div>
                 <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Email</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    {user && user.email}
+                    {user.email}
                   </dd>
                 </div>
               </dl>
